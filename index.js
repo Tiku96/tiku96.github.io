@@ -13,7 +13,7 @@ setInterval(() => {
 
 // Register service worker to control making site work offline
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator  && 'PushManager' in window) {
   navigator.serviceWorker
     .register('sw.js')
     .then(() => { console.log('Service Worker Registered'); });
