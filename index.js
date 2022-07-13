@@ -5,7 +5,7 @@ function randomValueFromArray(array) {
   const randomNo = Math.floor(Math.random() * array.length);
   return array[randomNo];
 }
-initializeUi();
+
 
 setInterval(() => {
   const randomChoice = randomValueFromArray(images);
@@ -17,7 +17,7 @@ setInterval(() => {
 if ('serviceWorker' in navigator  && 'PushManager' in window) {
   navigator.serviceWorker
     .register('sw.js')
-    .then(() => { console.log('Service Worker Registered'); });
+    .then(() => {initializeUi(); });
 }
 
 // Code to handle install prompt on desktop
