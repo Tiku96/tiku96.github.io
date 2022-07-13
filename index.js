@@ -53,7 +53,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
 
 function initializeUi() {
-  notificationButton.addEventListener("click", () => {
+  addBtn.addEventListener("click", () => {
     displayNotification();
   });
 }
