@@ -5,6 +5,7 @@ function randomValueFromArray(array) {
   const randomNo = Math.floor(Math.random() * array.length);
   return array[randomNo];
 }
+initializeUi();
 
 setInterval(() => {
   const randomChoice = randomValueFromArray(images);
@@ -49,3 +50,41 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
   });
 });
+
+
+function initializeUi() {
+  notificationButton.addEventListener("click", () => {
+    displayNotification();
+  });
+}
+
+function displayNotification() {
+  if (window.Notification && Notification.permission === "granted") {
+    notification();
+  }
+  // If the user hasn't told if he wants to be notified or not
+  // Note: because of Chrome, we are not sure the permission property
+  // is set, therefore it's unsafe to check for the "default" value.
+  else if (window.Notification && Notification.permission !== "denied") {
+    Notification.requestPermission(status => {
+      if (status === "granted") {
+        notification();
+      } else {
+        alert("You denied or dismissed permissions to notifications.");
+      }
+    });
+  } else {
+    // If the user refuses to get notified
+    alert(
+      "You denied permissions to notifications. Please go to your browser or phone setting to allow notifications."
+    );
+  }
+}
+
+function notification() {
+  const options = {
+    body: "Testing Our Notification",
+    icon: "./bell.png"
+  };
+  swRegistration.showNotification("PWA Notification!", options);
+}
