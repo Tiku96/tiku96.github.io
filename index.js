@@ -1,5 +1,6 @@
 const images = ['fox1', 'fox2', 'fox3', 'fox4'];
 const imgElem = document.querySelector('img');
+let swRegistration = null;
 
 function randomValueFromArray(array) {
   const randomNo = Math.floor(Math.random() * array.length);
@@ -17,7 +18,12 @@ setInterval(() => {
 if ('serviceWorker' in navigator  && 'PushManager' in window) {
   navigator.serviceWorker
     .register('sw.js')
-    .then(() => {initializeUi(); });
+    .then(swReg => {
+      console.log("Service Worker is registered", swReg);
+
+      swRegistration = swReg;
+      initializeUi();
+    });
 }
 
 // Code to handle install prompt on desktop
